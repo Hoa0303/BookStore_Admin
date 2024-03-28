@@ -26,7 +26,7 @@
             <ErrorMessage name="phone" class="error-feedback text-danger" />
         </div>
         <div class="text-center">
-            <p>Đã có tài khoản? <router-link to="/login">Quay về trang đăng nhập</router-link></p>
+            <p>Đã có tài khoản? <router-link to="/">Quay về trang đăng nhập</router-link></p>
         </div>
         <div class="form-group d-flex justify-content-center">
             <button class="btn btn-primary" type="submit"> Đăng ký

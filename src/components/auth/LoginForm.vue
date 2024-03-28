@@ -9,7 +9,10 @@
             <label for="password">Mật khẩu</label>
             <Field name="password" type="password" class="form-control" v-model="loginData.password" />
             <ErrorMessage name="password" class="error-feedback text-danger" />
-        </div>        
+        </div>
+        <div class="text-center">
+            <p>Bạn chưa có tài khoản? <router-link to="/register">Đăng ký</router-link></p>
+        </div>
         <div class="form-group d-flex justify-content-center">
             <button class="btn btn-primary" type="submit">Đăng nhập
             </button>
