@@ -2,7 +2,7 @@
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
-                <tr>
+                <tr class="text-center ">
                     <th scope="col">Title</th>
                     <th scope="col">Author</th>
                     <th scope="col">Genre</th>
@@ -17,7 +17,7 @@
                     <td>{{ contact.title }}</td>
                     <td>{{ contact.author }}</td>
                     <td>{{ contact.genre }}</td>
-                    <td>
+                    <td class="text-center">
                         <!-- Sử dụng phần tử <img> để hiển thị hình ảnh từ URL -->
                         <img :src="contact.imageUrl" alt="Hình ảnh" style="max-width: 100px; max-height: 100px;" />
                     </td>

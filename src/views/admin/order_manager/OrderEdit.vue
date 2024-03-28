@@ -46,6 +46,7 @@ export default {
             try {
                 await OrderService.update(this.contact._id, data);
                 this.message = "Thông tin đã được thay đổi.";
+                this.$router.push({ name: "order_manager" });
             } catch (error) {
                 console.log(error);
             }
