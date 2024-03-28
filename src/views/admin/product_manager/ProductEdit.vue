@@ -2,7 +2,7 @@
     <div class="container">
         <h4 class="text-center">Hiệu chỉnh Liên hệ</h4>
         <div class="col-md-9 mx-auto">
-            <ProductForm :contact="contact" @submit:contact="updateContact" @delete:contact="deleteContact" />
+            <ProductForm :product="product" @submit:product="updateProduct" @delete:product="deleteProduct" />
             <p class="text-center">{{ message }}</p>
         </div>
     </div>
@@ -21,14 +21,14 @@ export default {
     },
     data() {
         return {
-            contact: null,
+            product: null,
             message: "",
         };
     },
     methods: {
-        async getContact(id) {
+        async getProduct(id) {
             try {
-                this.contact = await BookService.get(id);
+                this.product = await BookService.get(id);
             } catch (error) {
                 console.log(error);
                 // Chuyển sang trang NotFound đồng thời giữ cho URL không đổi
@@ -42,9 +42,9 @@ export default {
                 });
             }
         },
-        async updateContact(data) {
+        async updateProduct(data) {
             try {
-                await BookService.update(this.contact._id, data);
+                await BookService.update(this.product._id, data);
                 window.alert("Thông tin đã được thay đổi")
                 this.$router.push({ name: "book_manager" });
             } catch (error) {
@@ -52,10 +52,10 @@ export default {
             }
         },
 
-        async deleteContact() {
+        async deleteProduct() {
             if (confirm("Bạn muốn xóa sản phẩm này?")) {
                 try {
-                    await BookService.delete(this.contact._id);
+                    await BookService.delete(this.product._id);
                     this.$router.push({ name: "book_manager" });
                 } catch (error) {
                     console.log(error);
@@ -64,7 +64,7 @@ export default {
         },
     },
     created() {
-        this.getContact(this.id);
+        this.getProduct(this.id);
         this.message = "";
     },
 };

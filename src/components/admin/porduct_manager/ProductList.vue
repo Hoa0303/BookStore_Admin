@@ -12,19 +12,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(contact, index) in contacts" :key="contact._id" :class="{ active: index === activeIndex }"
+                <tr v-for="(product, index) in products" :key="product._id" :class="{ active: index === activeIndex }"
                     @click="updateActiveIndex(index)">
-                    <td>{{ contact.title }}</td>
-                    <td>{{ contact.author }}</td>
-                    <td>{{ contact.genre }}</td>
+                    <td>{{ product.title }}</td>
+                    <td>{{ product.author }}</td>
+                    <td>{{ product.genre }}</td>
                     <td class="text-center">
                         <!-- Sử dụng phần tử <img> để hiển thị hình ảnh từ URL -->
-                        <img :src="contact.imageUrl" alt="Hình ảnh" style="max-width: 100px; max-height: 100px;" />
+                        <img :src="product.imageUrl" alt="Hình ảnh" style="max-width: 100px; max-height: 100px;" />
                     </td>
-                    <td>{{ contact.quantity }}</td>
+                    <td>{{ product.quantity }}</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <router-link :to="{ name: 'product.edit', params: { id: contact._id }, }" class="nav-link">
+                            <router-link :to="{ name: 'product.edit', params: { id: product._id }, }" class="nav-link">
                                 <span class="btn btn-sm btn-success" style="white-space: nowrap;">
                                     <i class="fas fa-plus"></i> Hiệu chỉnh
                                 </span>
@@ -41,7 +41,7 @@
 <script>
 export default {
     props: {
-        contacts: { type: Array, default: [] },
+        products: { type: Array, default: [] },
         activeIndex: { type: Number, default: -1 },
     },
     emits: ["update:activeIndex"],

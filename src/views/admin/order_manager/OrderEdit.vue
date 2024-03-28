@@ -2,7 +2,7 @@
     <div class="container">
         <h4 class="text-center">Hiệu chỉnh Liên hệ</h4>
         <div class="col-md-6 mx-auto">
-            <ContactForm :contact="contact" @submit:contact="updateContact" />
+            <OrderForm :order="order" @submit:order="updateOrder" />
             <p class="text-center">{{ message }}</p>
         </div>
     </div>
@@ -10,25 +10,25 @@
 
 
 <script>
-import ContactForm from "@/components/admin/order_manager/OrderForm.vue";
+import OrderForm from "@/components/admin/order_manager/OrderForm.vue";
 import OrderService from "@/services/order.service";
 export default {
     components: {
-        ContactForm,
+        OrderForm,
     },
     props: {
         id: { type: String, required: true },
     },
     data() {
         return {
-            contact: null,
+            order: null,
             message: "",
         };
     },
     methods: {
-        async getContact(id) {
+        async getOrder(id) {
             try {
-                this.contact = await OrderService.get(id);
+                this.order = await OrderService.get(id);
             } catch (error) {
                 console.log(error);
                 // Chuyển sang trang NotFound đồng thời giữ cho URL không đổi
@@ -42,9 +42,9 @@ export default {
                 });
             }
         },
-        async updateContact(data) {
+        async updateOrder(data) {
             try {
-                await OrderService.update(this.contact._id, data);
+                await OrderService.update(this.order._id, data);
                 this.message = "Thông tin đã được thay đổi.";
                 this.$router.push({ name: "order_manager" });
             } catch (error) {
@@ -53,7 +53,7 @@ export default {
         },
     },
     created() {
-        this.getContact(this.id);
+        this.getOrder(this.id);
         this.message = "";
     },
 };

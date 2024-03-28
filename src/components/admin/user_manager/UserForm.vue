@@ -67,8 +67,8 @@ export default {
     },
     methods: {
         submitContact() {
-            // this.$emit("submit:contact", this.contactLocal);
-            console.log(this.contactLocal);
+            this.$emit("submit:contact", this.contactLocal);
+            // console.log(this.contactLocal);
         }
     },
 };

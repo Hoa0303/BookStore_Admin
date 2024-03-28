@@ -2,36 +2,35 @@
     <div class="container">
         <h4 class="text-center">Thêm sản phẩm mới</h4>
         <div class="col-md-6 mx-auto">
-            <ContactForm :contact="newContact" @submit:contact="addContact" />
+            <ProductForm :product="newProduct" @submit:product="addProduct" />
         </div>
-        <p class="text-center">{{ message }}</p>
     </div>
 </template>
 
 <script>
-import ContactForm from "@/components/admin/porduct_manager/UserForm.vue";
+import ProductForm from "@/components/admin/porduct_manager/ProductForm.vue";
 import BookService from "@/services/book.service";
 export default {
     components: {
-        ContactForm,
+        ProductForm,
     },
     data() {
         return {
-            newContact: {
-                name: '',
-                email: '',
-                address: '',
-                phone: '',
-                favorite: false
+            newProduct: {
+                title: '',
+                author: '',
+                genre: '',
+                imageUrl: '',
+                quantity: '',
             },
-            message: "",
         };
     },
     methods: {
-        async addContact(data) {
+        async addProduct(data) {
             try {
                 await BookService.create(data);
-                this.message = "Sản phẩm mới được thêm mới thành công.";
+                window.alert("Sản phẩm đã thêm thành công")
+                this.$router.push({ name: "book_manager" });
             } catch (error) {
                 console.log(error);
             }

@@ -5,11 +5,10 @@
         </div>
         <div class="mt-3">
             <h4 class="mb-4">
-                <i class="fas fa-address-book mr-2"></i> Đơn mượn sách
+                <i class="fas fa-clipboard mr-2"></i> Đơn mượn sách
             </h4>
-            <OrderList v-if="filteredContactsCount > 0" :contacts="filteredContacts"
-                v-model:activeIndex="activeIndex" />
-            <p v-else class="text-muted" style="min-width: 750px;">Không có liên hệ nào.</p>
+            <OrderList v-if="filteredOrdersCount > 0" :orders="filteredOrders" v-model:activeIndex="activeIndex" />
+            <p v-else class="text-muted" style="min-width: 750px;">Không có đơn mượn nào.</p>
         </div>
     </div>
 </template>
@@ -27,7 +26,7 @@ export default {
     },
     data() {
         return {
-            users: [],
+            orders: [],
             activeIndex: -1,
             searchText: "",
         };
@@ -38,36 +37,36 @@ export default {
         },
     },
     computed: {
-        contactStrings() {
-            return this.users.map((user) => {
-                const { ngayMuon, ngayTra, status } = user;
-                return [ngayMuon, ngayTra, status].join("");
+        orderStrings() {
+            return this.orders.map((order) => {
+                const { name, status } = order;
+                return [name, status].join("");
             });
         },
-        filteredContacts() {
-            if (!this.searchText) return this.users;
-            return this.users.filter((_user, index) =>
-                this.contactStrings[index].includes(this.searchText)
+        filteredOrders() {
+            if (!this.searchText) return this.orders;
+            return this.orders.filter((_order, index) =>
+                this.orderStrings[index].includes(this.searchText)
             );
         },
-        activeContact() {
+        activeOrder() {
             if (this.activeIndex < 0) return null;
-            return this.filteredContacts[this.activeIndex];
+            return this.filteredOrders[this.activeIndex];
         },
-        filteredContactsCount() {
-            return this.filteredContacts.length;
+        filteredOrdersCount() {
+            return this.filteredOrders.length;
         },
     },
     methods: {
-        async retrieveContacts() {
+        async retrieveOrders() {
             try {
-                this.users = await OrderService.getAll();
+                this.orders = await OrderService.getAll();
             } catch (error) {
                 console.log(error);
             }
         },
         refreshList() {
-            this.retrieveContacts();
+            this.retrieveOrders();
             this.activeIndex = -1;
         }
     },

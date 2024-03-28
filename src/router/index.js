@@ -1,8 +1,30 @@
 import { createWebHistory, createRouter } from "vue-router";
+// Auth
+import Register from "@/views/auth/RegisterPage.vue";
+import LoginPage from "@/views/auth/LoginPage.vue";
+
+// Function admin
 import ContactBook from "@/views/admin/user_manager/UserBook.vue";
 import Product from "@/views/admin/product_manager/BookManager.vue"
 import OrderManager from "@/views/admin/order_manager/OrderManager.vue";
 const routes = [
+    //Auth
+    {
+        path: "/register",
+        name: "register",
+        component: Register,
+    },
+    {
+        path: "/admin",
+        name: "adminpage",
+        component: Product,
+    },
+    {
+        path: "/",
+        name: "login",
+        component: LoginPage,
+    },
+
     // User_manager
     {
         path: "/admin/user_manager",

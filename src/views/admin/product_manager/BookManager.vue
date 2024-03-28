@@ -5,9 +5,9 @@
         </div>
         <div class="mt-3">
             <h4 class="mb-4">
-                <i class="fas fa-address-book mr-2"></i> Sản phẩm
+                <i class="fas fa-book mr-2"></i> Sản phẩm
             </h4>
-            <ProductList v-if="filteredContactsCount > 0" :contacts="filteredContacts"
+            <ProductList v-if="filteredProductsCount > 0" :products="filteredProducts"
                 v-model:activeIndex="activeIndex" />
             <p v-else class="text-muted" style="min-width: 750px;">Không có sản phẩm nào.</p>
             <button class="btn btn-primary mt-3 mb-3" @click="goToAddProduct">
@@ -29,7 +29,7 @@ export default {
     },
     data() {
         return {
-            users: [],
+            Products: [],
             activeIndex: -1,
             searchText: "",
         };
@@ -41,36 +41,36 @@ export default {
     },
     computed: {
         contactStrings() {
-            return this.users.map((user) => {
+            return this.Products.map((user) => {
                 const { title, author, genre, imageurl, quantity } = user;
                 return [title, author, genre, imageurl, quantity].join("");
             });
         },
-        filteredContacts() {
-            if (!this.searchText) return this.users;
-            return this.users.filter((_user, index) =>
+        filteredProducts() {
+            if (!this.searchText) return this.Products;
+            return this.Products.filter((_user, index) =>
                 this.contactStrings[index].includes(this.searchText)
             );
         },
-        activeContact() {
+        activeProduct() {
             if (this.activeIndex < 0) return null;
-            return this.filteredContacts[this.activeIndex];
+            return this.filteredProducts[this.activeIndex];
         },
-        filteredContactsCount() {
-            return this.filteredContacts.length;
+        filteredProductsCount() {
+            return this.filteredProducts.length;
         },
     },
     methods: {
-        async retrieveContacts() {
+        async retrieveProducts() {
             try {
-                this.users = await ProductService.getAll();
+                this.Products = await ProductService.getAll();
                 console.log(await ProductService.getAll());
             } catch (error) {
                 console.log(error);
             }
         },
         refreshList() {
-            this.retrieveContacts();
+            this.retrieveProducts();
             this.activeIndex = -1;
         },
         goToAddProduct() {

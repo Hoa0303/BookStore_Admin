@@ -9,7 +9,7 @@ export default {
 
 <template>
   <div id="app">
-    <AppHeader />
+    <AppHeader v-if="$route.path.includes('/admin')" />
     <div class="container mt-5 d-flex justify-content-center align-items-center">
       <router-view />
     </div>

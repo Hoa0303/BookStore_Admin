@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand navbar-dark bg-dark justify-content-lg-around  ">
+    <nav class="navbar navbar-expand navbar-dark bg-dark justify-content-lg-around">
         <a href="/admin/product_manager" class="navbar-brand">Books Store</a>
         <div class="mr-auto navbar-nav">
             <li class="nav-item">
@@ -20,6 +20,46 @@
                     Tài khoản
                 </router-link>
             </li>
+            <li class="nav-item" v-if="userName">
+                <router-link to="#" class="nav-link" @click="confirmLogout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span> {{ userName }}</span>
+                </router-link>
+            </li>
         </div>
     </nav>
 </template>
+
+<script>
+import Cookies from 'js-cookie';
+
+export default {
+    data() {
+        return {
+            userName: ''
+        };
+    },
+    mounted() {
+        this.getUserNameFromCookie();
+    },
+    methods: {
+        getUserNameFromCookie() {
+            const userName = Cookies.get('userName');
+            if (userName) {
+                this.userName = userName;
+            }
+        },
+        confirmLogout() {
+            if (confirm("Bạn có chắc muốn đăng xuất không?")) {
+                this.logout();
+            }
+        },
+        logout() {
+            Cookies.remove('userName');
+            Cookies.remove('userId');
+            this.userName = '';
+            this.$router.push({ name: 'login' });
+        }
+    }
+};
+</script>

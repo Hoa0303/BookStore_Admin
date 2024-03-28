@@ -1,21 +1,21 @@
 <template>
-    <Form @submit="submitContact" :validation-schema="contactFormSchema" class="my-form">
+    <Form @submit="submitOrder" :validation-schema="orderFormSchema" class="my-form">
         <div class="form-group">
             <label for="title">Tên người mượn sách</label>
-            <Field name="title" type="text" class="form-control" v-model="contactLocal.name" />
+            <Field name="title" type="text" class="form-control" v-model="orderLocal.name" />
             <ErrorMessage name="title" class="error-feedback" />
         </div>
         <div class="form-group">
             <label for="ngayMuon">Ngày Mượn</label>
-            <Field name="ngayMuon" type="text" class="form-control" v-model="contactLocal.ngayMuon" />
+            <Field name="ngayMuon" type="text" class="form-control" v-model="orderLocal.ngayMuon" />
             <ErrorMessage name="ngayMuon" class="error-feedback" />
         </div>
         <div class="form-group">
             <label for="ngayTra">Ngày Trả</label>
-            <Field name="ngayTra" type="text" class="form-control" v-model="contactLocal.ngayTra" />
+            <Field name="ngayTra" type="text" class="form-control" v-model="orderLocal.ngayTra" />
             <ErrorMessage name="ngayTra" class="error-feedback" />
         </div>
-        <div v-for="(book, index) in contactLocal.books" :key="index">
+        <div v-for="(book, index) in orderLocal.books" :key="index">
             <div class="form-group">
                 <label>{{ 'Tên sách ' + (index + 1) }}</label>
                 <Field :name="'books[' + index + '].title'" type="text" class="form-control" v-model="book.title" />
@@ -30,14 +30,14 @@
         </div>
         <div class="form-group">
             <label for="status">Tình trạng</label>
-            <select v-model="contactLocal.status" class="form-control">
+            <select v-model="orderLocal.status" class="form-control">
                 <option disabled value="">Chọn tình trạng</option>
                 <option v-for="option in statusOptions" :value="option.value" :key="option.value">{{ option.text }}
                 </option>
             </select>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary me-1" type="submit" @click="submitContact">
+            <button class="btn btn-primary me-1" type="submit" @click="submitOrder">
                 <i class="fas fa-save"></i> Lưu
             </button>
         </div>
@@ -54,12 +54,12 @@ export default {
         Field,
         ErrorMessage,
     },
-    emits: ["submit:contact", "delete:contact"],
+    emits: ["submit:order", "delete:order"],
     props: {
-        contact: { type: Object, required: true }
+        order: { type: Object, required: true }
     },
     data() {
-        const contactFormSchema = yup.object().shape({
+        const orderFormSchema = yup.object().shape({
             name: yup
                 .string()
                 .required('Tên người mượn sách không được để trống.'),
@@ -87,8 +87,8 @@ export default {
         });
 
         return {
-            contactLocal: this.contact,
-            contactFormSchema,
+            orderLocal: this.order,
+            orderFormSchema,
             statusOptions: [
                 { value: 'Đang đợi duyệt', text: 'Đang đợi duyệt' },
                 { value: 'Đang mượn', text: 'Đang mượn' },
@@ -99,9 +99,9 @@ export default {
         };
     },
     methods: {
-        submitContact() {
-            console.log(this.contactLocal);
-            this.$emit("submit:contact", this.contactLocal);
+        submitOrder() {
+            console.log(this.orderLocal);
+            this.$emit("submit:order", this.orderLocal);
         }
     },
 };
