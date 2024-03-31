@@ -7,12 +7,12 @@
         </div>
         <div class="form-group">
             <label for="ngayMuon">Ngày Mượn</label>
-            <Field name="ngayMuon" type="text" class="form-control" v-model="orderLocal.ngayMuon" />
+            <Field name="ngayMuon" type="date" class="form-control" v-model="orderLocal.ngayMuon" />
             <ErrorMessage name="ngayMuon" class="error-feedback" />
         </div>
         <div class="form-group">
             <label for="ngayTra">Ngày Trả</label>
-            <Field name="ngayTra" type="text" class="form-control" v-model="orderLocal.ngayTra" />
+            <Field name="ngayTra" type="date" class="form-control" v-model="orderLocal.ngayTra" />
             <ErrorMessage name="ngayTra" class="error-feedback" />
         </div>
         <div v-for="(book, index) in orderLocal.books" :key="index">
@@ -63,12 +63,8 @@ export default {
             name: yup
                 .string()
                 .required('Tên người mượn sách không được để trống.'),
-            ngayMuon: yup
-                .string()
-                .required('Ngày Mượn không được để trống.'),
-            ngayTra: yup
-                .string()
-                .required('Ngày Trả không được để trống.'),
+            ngayMuon: '',
+            ngayTra: '',
             status: yup
                 .string()
                 .required('Tình trạng không được để trống.'),

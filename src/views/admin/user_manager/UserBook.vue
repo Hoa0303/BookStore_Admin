@@ -14,7 +14,6 @@
     </div>
 </template>
 
-
 <script>
 import InputSearch from "@/components/admin/InputSearch.vue";
 import ContactList from "@/components/admin/user_manager/UserList.vue";

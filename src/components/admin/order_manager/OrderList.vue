@@ -3,7 +3,7 @@
         <div v-for="(order) in orders" :key="order._id" class="list-group mt-5">
             <div class="d-flex w-100 justify-content-between list-group-item">
                 <h6>{{ order.ngayMuon }} -> {{ order.ngayTra }}</h6>
-                <h5 class="mb-1">{{ order.name }}</h5>
+                <h5 class="mb-1">{{ order.name }} - {{ order.userId }}</h5>
                 <p class="mb-1">
                 <h6> Trạng thái:
                     <span :class="{
