@@ -15,6 +15,12 @@
                 </router-link>
             </li>
             <li class="nav-item">
+                <router-link :to="{ name: 'publish_manager' }" class="nav-link">
+                    <i class="fas fa-upload"></i>
+                    Nhà xuất bản
+                </router-link>
+            </li>
+            <li class="nav-item">
                 <router-link :to="{ name: 'contactbook' }" class="nav-link">
                     <i class="fas fa-user"></i>
                     Tài khoản

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h4 class="text-center">Hiệu chỉnh Liên hệ</h4>
+        <h4 class="text-center">Hiệu chỉnh đơn mượn</h4>
         <div class="col-md-6 mx-auto">
             <OrderForm :order="order" @submit:order="updateOrder" />
             <p class="text-center">{{ message }}</p>

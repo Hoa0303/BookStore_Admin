@@ -1,5 +1,5 @@
 <template>
-    <div class="page row">
+    <div class="row">
         <div class="col-12">
             <InputSearch v-model="searchText" />
         </div>
@@ -9,7 +9,7 @@
             </h4>
             <ProductList v-if="filteredProductsCount > 0" :products="filteredProducts"
                 v-model:activeIndex="activeIndex" />
-            <p v-else class="text-muted" style="min-width: 750px;">Không có sản phẩm nào.</p>
+            <p v-else class="text-muted" style="width: 935px;">Không có sản phẩm nào.</p>
             <button class="btn btn-primary mt-3 mb-3" @click="goToAddProduct">
                 <i class="fas fa-plus"></i> Thêm mới
             </button>
@@ -83,10 +83,3 @@ export default {
 
 };
 </script>
-
-<style scoped>
-.page {
-    text-align: left;
-    max-width: 750px;
-}
-</style>

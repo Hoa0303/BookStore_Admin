@@ -11,6 +11,15 @@
             <ErrorMessage name="author" class="error-feedback" />
         </div>
         <div class="form-group">
+            <label for="publish">Nhà xuất bản</label>
+            <select v-model="productLocal.publisher" class="form-control">
+                <option disabled value="">Chọn nhà xuất bản</option>
+                <option v-for="publisher in publishers" :key="publisher.id" :value="publisher.name">{{ publisher.name }}
+                </option>
+            </select>
+            <ErrorMessage name="publish" class="error-feedback" />
+        </div>
+        <div class="form-group">
             <label for="genre">Thể loại</label>
             <Field name="genre" type="text" class="form-control" v-model="productLocal.genre" />
             <ErrorMessage name="genre" class="error-feedback" />
@@ -39,6 +48,8 @@
 <script>
 import * as yup from "yup";
 import { Form, Field, ErrorMessage } from "vee-validate";
+import PublishService from "@/services/publish.service";
+
 export default {
     components: {
         Form,
@@ -60,6 +71,8 @@ export default {
                 .string()
                 .required("Tác giả phải có giá trị.")
                 .max(50, "Tác giả có nhiều nhất 50 ký tự."),
+            publish: yup
+                .string(),
             genre: yup
                 .string()
                 .required("Thể loại phải có giá trị.")
@@ -74,9 +87,16 @@ export default {
         return {
             productLocal: this.product,
             ProductFormSchema,
+            publishers: []
         };
     },
+    mounted() {
+        this.getPublish();
+    },
     methods: {
+        async getPublish() {
+            this.publishers = await PublishService.getAll();
+        },
         submitProduct() {
             this.$emit("submit:product", this.productLocal);
         },

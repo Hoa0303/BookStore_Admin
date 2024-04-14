@@ -7,6 +7,7 @@ import LoginPage from "@/views/auth/LoginPage.vue";
 import ContactBook from "@/views/admin/user_manager/UserBook.vue";
 import Product from "@/views/admin/product_manager/BookManager.vue"
 import OrderManager from "@/views/admin/order_manager/OrderManager.vue";
+import PublishManager from "@/views/admin/publisher_manager/PublishManager.vue";
 const routes = [
     //Auth
     {
@@ -72,6 +73,23 @@ const routes = [
         component: () => import("@/views/admin/order_manager/OrderEdit.vue"),
         props: true
     },
+    // Publish_manager
+    {
+        path: "/admin/publish_manager",
+        name: "publish_manager",
+        component: PublishManager,
+    },
+    {
+        path: "/admin/publish_manager/:id",
+        name: "publish.edit",
+        component: () => import("@/views/admin/publisher_manager/PublishEdit.vue"),
+        props: true,
+    },
+    {
+        path: "/admin/publish_manager/add",
+        name: "publish.add",
+        component: () => import("@/views/admin/publisher_manager/PublishAdd.vue"),
+    }
 ];
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),

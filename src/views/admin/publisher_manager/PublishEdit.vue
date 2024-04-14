@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <h4 class="text-center">Hiệu chỉnh sản phẩm</h4>
+        <h4 class="text-center">Hiệu chỉnh nhà sản xuất</h4>
         <div class="col-md-9 mx-auto">
-            <ProductForm :product="product" @submit:product="updateProduct" @delete:product="deleteProduct" />
+            <PublishForm :product="product" @submit:product="updateProduct" @delete:product="deleteProduct" />
             <p class="text-center">{{ message }}</p>
         </div>
     </div>
@@ -10,11 +10,11 @@
 
 
 <script>
-import ProductForm from "@/components/admin/porduct_manager/ProductForm.vue";
-import BookService from "@/services/book.service";
+import PublishForm from "@/components/admin/publish_manager/PublishForm.vue";
+import PublishService from "@/services/publish.service";
 export default {
     components: {
-        ProductForm,
+        PublishForm,
     },
     props: {
         id: { type: String, required: true },
@@ -28,7 +28,7 @@ export default {
     methods: {
         async getProduct(id) {
             try {
-                this.product = await BookService.get(id);
+                this.product = await PublishService.get(id);
             } catch (error) {
                 console.log(error);
                 // Chuyển sang trang NotFound đồng thời giữ cho URL không đổi
@@ -44,9 +44,9 @@ export default {
         },
         async updateProduct(data) {
             try {
-                await BookService.update(this.product._id, data);
+                await PublishService.update(this.product._id, data);
                 window.alert("Thông tin đã được thay đổi")
-                this.$router.push({ name: "book_manager" });
+                this.$router.push({ name: "publish_manager" });
             } catch (error) {
                 console.log(error);
             }
@@ -55,8 +55,8 @@ export default {
         async deleteProduct() {
             if (confirm("Bạn muốn xóa sản phẩm này?")) {
                 try {
-                    await BookService.delete(this.product._id);
-                    this.$router.push({ name: "book_manager" });
+                    await PublishService.delete(this.product._id);
+                    this.$router.push({ name: "publish_manager" });
                 } catch (error) {
                     console.log(error);
                 }

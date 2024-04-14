@@ -1,17 +1,17 @@
 <template>
     <div>
-        <div v-for="(order) in orders" :key="order._id" class="list-group mt-5">
+        <div v-for="(order) in sortedOrders" :key="order._id" class="list-group mt-5">
             <div class="d-flex w-100 justify-content-between list-group-item">
                 <h6>{{ order.ngayMuon }} -> {{ order.ngayTra }}</h6>
                 <h5 class="mb-1">{{ order.name }} - {{ order.userId }}</h5>
                 <p class="mb-1">
                 <h6> Trạng thái:
                     <span :class="{
-            'text-warning': order.status === 'Đang đợi duyệt',
-            'text-info': order.status === 'Đang mượn',
-            'text-primary': order.status === 'Đã trả',
-            'text-danger': order.status === 'Đã hủy' || order.status === 'Quá hạn trả'
-        }">
+                        'text-warning': order.status === 'Đang đợi duyệt',
+                        'text-info': order.status === 'Đang mượn',
+                        'text-primary': order.status === 'Đã trả',
+                        'text-danger': order.status === 'Đã hủy' || order.status === 'Quá hạn trả'
+                    }">
                         {{ order.status }}
                     </span>
                 </h6>
@@ -49,6 +49,20 @@ export default {
         activeIndex: { type: Number, default: -1 },
     },
     emits: ["update:activeIndex"],
+    computed: {
+        sortedOrders() {
+            return this.orders.slice().sort((a, b) => {
+                const statusOrder = {
+                    'Đang đợi duyệt': 1,
+                    'Quá hạn trả': 2,
+                    'Đang mượn': 3,
+                    'Đã trả': 4,
+                    'Đã hủy': 5,
+                };
+                return statusOrder[a.status] - statusOrder[b.status];
+            });
+        }
+    },
     methods: {
         updateActiveIndex(index) {
             this.$emit("update:activeIndex", index);
