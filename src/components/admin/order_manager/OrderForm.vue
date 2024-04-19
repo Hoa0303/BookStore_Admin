@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
             <label for="status">Tình trạng</label>
-            <select v-model="orderLocal.status" class="form-control">
+            <select v-model="orderLocal.status" class="form-control" disabled>
                 <option disabled value="">Chọn tình trạng</option>
                 <option v-for="option in statusOptions" :value="option.value" :key="option.value">{{ option.text }}
                 </option>
@@ -90,7 +90,8 @@ export default {
                 { value: 'Đang mượn', text: 'Đang mượn' },
                 { value: 'Quá hạn trả', text: 'Quá hạn trả' },
                 { value: 'Đã trả', text: 'Đã trả' },
-                { value: 'Đã hủy', text: 'Đã hủy' }
+                { value: 'Đã hủy', text: 'Đã hủy' },
+                { value: 'Yêu cầu hủy đơn', text: 'Yêu cầu hủy đơn' }
             ],
         };
     },

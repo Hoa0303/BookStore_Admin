@@ -17,7 +17,7 @@
                     @click="updateActiveIndex(index)">
                     <td>{{ product.title }}</td>
                     <td>{{ product.author }}</td>
-                    <td>{{ product.publisher }}</td>
+                    <td> {{ product.publisher }} </td>
                     <td>{{ product.genre }}</td>
                     <td class="text-center">
                         <!-- Sử dụng phần tử <img> để hiển thị hình ảnh từ URL -->
