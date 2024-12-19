@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h4 class="text-center">Hiệu chỉnh nhà sản xuất</h4>
+        <h4 class="text-center">Hiệu chỉnh nhà xuất bản</h4>
         <div class="col-md-9 mx-auto">
             <PublishForm :product="product" @submit:product="updateProduct" @delete:product="deleteProduct" />
             <p class="text-center">{{ message }}</p>

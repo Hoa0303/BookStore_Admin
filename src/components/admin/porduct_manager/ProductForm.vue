@@ -31,7 +31,7 @@
         </div>
         <div class="form-group">
             <label for="quantity">Số lượng</label>
-            <Field name="quantity" type="tel" class="form-control" v-model="productLocal.quantity" />
+            <Field name="quantity" type="number" class="form-control" v-model="productLocal.quantity" />
             <ErrorMessage name="quantity" class="error-feedback" />
         </div>
         <div class="form-group">
